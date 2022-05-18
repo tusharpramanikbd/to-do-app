@@ -14,10 +14,22 @@ const Login = () => {
   const from = location.state?.from?.pathname || '/'
 
   useEffect(() => {
-    if (user) {
+    const getToken = async (email) => {
+      const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+      const data = await response.json()
+      localStorage.setItem('accessToken', data.accessToken)
       navigate(from, { replace: true })
     }
-  }, [user, navigate, from])
+    if (user) {
+      getToken(user.user.email)
+    }
+  }, [user, from, navigate])
 
   if (loading) {
     return <Loading />

@@ -58,7 +58,7 @@ const Navbar = () => {
             </ul>
           </div>
           <Link to='/home' className='btn btn-ghost normal-case text-xl'>
-            ToDo App
+            TODO APP
           </Link>
         </div>
         <div className='navbar-end hidden lg:flex'>

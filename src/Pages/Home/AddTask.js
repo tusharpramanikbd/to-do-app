@@ -17,10 +17,11 @@ const AddTask = ({ setTaskId }) => {
       email: user.email,
       status: 'Active',
     }
-    fetch('http://localhost:5000/task', {
+    fetch(`http://localhost:5000/task?email=${user.email}`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
       body: JSON.stringify(taskItem),
     })
