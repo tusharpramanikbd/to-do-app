@@ -1,14 +1,12 @@
 import React from 'react'
 
-const Task = () => {
+const Task = (props) => {
+  const { _id, title, description, email, status } = props.task
   return (
     <div className='bg-gray-200 p-4 rounded-lg'>
-      <h1 className='font-semibold'>Task Title</h1>
+      <h1 className='font-semibold'>{title}</h1>
       <p>
-        <small>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam
-          quasi a, reprehenderit quas alias minus?
-        </small>
+        <small>{description}</small>
       </p>
       <div className='flex items-center justify-center gap-x-4 mt-4'>
         <button className='btn btn-outline btn-success'>Done</button>

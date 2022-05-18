@@ -3,7 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { toast } from 'react-toastify'
 import auth from '../../firebase.init'
 
-const AddTask = () => {
+const AddTask = ({ setTaskId }) => {
   const [user] = useAuthState(auth)
 
   const handleAddtask = (event) => {
@@ -15,6 +15,7 @@ const AddTask = () => {
       title: taskTitle,
       description: taskDesc,
       email: user.email,
+      status: 'Active',
     }
     fetch('http://localhost:5000/task', {
       method: 'POST',
@@ -26,6 +27,7 @@ const AddTask = () => {
       .then((res) => res.json())
       .then((data) => {
         toast('Task Added')
+        setTaskId(data.result.insertedId)
         event.target.reset()
       })
   }
