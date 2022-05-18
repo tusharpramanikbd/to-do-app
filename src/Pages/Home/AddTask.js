@@ -1,12 +1,33 @@
 import React from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { toast } from 'react-toastify'
+import auth from '../../firebase.init'
 
 const AddTask = () => {
+  const [user] = useAuthState(auth)
+
   const handleAddtask = (event) => {
     event.preventDefault()
     const taskTitle = event.target.taskTitle.value
     const taskDesc = event.target.TaskDesc.value
-    console.log(taskTitle, taskDesc)
-    event.target.reset()
+
+    const taskItem = {
+      title: taskTitle,
+      description: taskDesc,
+      email: user.email,
+    }
+    fetch('http://localhost:5000/task', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(taskItem),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast('Task Added')
+        event.target.reset()
+      })
   }
 
   return (
@@ -26,7 +47,7 @@ const AddTask = () => {
               className='input input-bordered w-full max-w-xl'
             />
           </div>
-          <div className='form-control mt-4'>
+          <div className='form-control w-full max-w-xl mt-4'>
             <label className='label'>
               <span className='label-text'>Task Description</span>
             </label>
