@@ -9,12 +9,15 @@ const TaskList = ({ taskId }) => {
   const [taskList, setTaskList] = useState([])
 
   const deleteTask = (id) => {
-    fetch(`http://localhost:5000/task/${id}?email=${user.email}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-    })
+    fetch(
+      `https://protected-waters-10705.herokuapp.com/task/${id}?email=${user.email}`,
+      {
+        method: 'DELETE',
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {
@@ -27,14 +30,17 @@ const TaskList = ({ taskId }) => {
 
   const doneTask = (id) => {
     const task = { newStatus: 'Done' }
-    fetch(`http://localhost:5000/task/${id}?email=${user.email}`, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json',
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-      body: JSON.stringify(task),
-    })
+    fetch(
+      `https://protected-waters-10705.herokuapp.com/task/${id}?email=${user.email}`,
+      {
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json',
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+        body: JSON.stringify(task),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         toast('Task is done')
@@ -49,11 +55,14 @@ const TaskList = ({ taskId }) => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:5000/task?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-    })
+    fetch(
+      `https://protected-waters-10705.herokuapp.com/task?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => setTaskList(data))
   }, [user.email, taskId])
