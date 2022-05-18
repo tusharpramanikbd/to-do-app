@@ -26,7 +26,7 @@ const AddTask = ({ setTaskId }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        toast('Task Added')
+        toast('Task is added')
         setTaskId(data.result.insertedId)
         event.target.reset()
       })

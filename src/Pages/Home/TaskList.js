@@ -22,6 +22,28 @@ const TaskList = ({ taskId }) => {
       })
   }
 
+  const doneTask = (id) => {
+    const task = { newStatus: 'Done' }
+    fetch(`http://localhost:5000/task/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(task),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast('Task is done')
+        const updatedTaskList = taskList.map((task) => {
+          if (task._id === id) {
+            task.status = 'Done'
+          }
+          return task
+        })
+        setTaskList(updatedTaskList)
+      })
+  }
+
   useEffect(() => {
     fetch(`http://localhost:5000/task?email=${user.email}`)
       .then((res) => res.json())
@@ -33,7 +55,12 @@ const TaskList = ({ taskId }) => {
       <div className='card-body'>
         <h2 className='text-2xl font-bold text-center'>Task List</h2>
         {taskList.map((task) => (
-          <Task key={task._id} task={task} deleteTask={deleteTask} />
+          <Task
+            key={task._id}
+            task={task}
+            deleteTask={deleteTask}
+            doneTask={doneTask}
+          />
         ))}
       </div>
     </div>
