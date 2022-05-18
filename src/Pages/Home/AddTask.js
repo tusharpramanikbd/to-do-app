@@ -10,7 +10,7 @@ const AddTask = () => {
   }
 
   return (
-    <div className='card w-full md:w-3/4 lg:w-1/2 mx-auto bg-base-100 shadow-xl mt-4'>
+    <div className='card w-full md:w-3/4 lg:w-1/2 mx-auto bg-base-100 shadow-xl'>
       <div className='card-body'>
         <h1 className='text-2xl font-bold text-center'>Add Task</h1>
         <form onSubmit={handleAddtask}>

@@ -11,8 +11,8 @@ const Task = () => {
         </small>
       </p>
       <div className='flex items-center justify-center gap-x-4 mt-4'>
-        <button class='btn btn-outline btn-success'>Done</button>
-        <button class='btn btn-outline btn-error'>Delete</button>
+        <button className='btn btn-outline btn-success'>Done</button>
+        <button className='btn btn-outline btn-error'>Delete</button>
       </div>
     </div>
   )

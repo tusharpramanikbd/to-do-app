@@ -4,7 +4,7 @@ import TaskList from './TaskList'
 
 const Home = () => {
   return (
-    <div className='container mx-auto'>
+    <div className='bg-gray-50 h-min'>
       <AddTask />
       <TaskList />
     </div>
